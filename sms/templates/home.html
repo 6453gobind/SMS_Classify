@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SMS</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+    <center>
+	<div class="container">
+        <form action = "{% url 'script' %}" method = "get">
+		
+			<h1>IS YOUR SMS A SPAM ?</h1>
+			<p>This app will help you to classify weather your SMS is a SPAM or Not.</p>
+            
+			<label for="sms"> SMS: </label>
+            <input id="sms" type="text" name="sms">
+            <button type="submit" value="OK"  >Classify</button>
+
+		
+    </form>
+	</div>
+    <br><br>
+    <div class="container">
+        {% if data %}
+
+        <label for="your_text">Your SMS : </label> {{data.data}}
+        <br>
+        <label for="spam_score">SPAM SCORE : </label> {{data.prob}}
+        <br>
+        <label for="prediction">PREDICTION : </label> {{data.pred}}
+        
+        {% endif %}
+    </div>
+</center>
+</body>
+</html>
