@@ -12,16 +12,13 @@ def sms(request):
 
 def output(request):
     output_result = {}
-    data = "HELLO GOBIND"
     data = request.GET['sms']
     print(data)
     output_result["data"]=data
     
-
     filename = 'trained_model.sav'
     filename_2 = 'trained_vectorizer.sav'
 
-    # load the model from disk
     loaded_model = pickle.load(open(filename, 'rb'))
     loaded_vectorizer = pickle.load(open(filename_2, 'rb'))
 
@@ -36,15 +33,11 @@ def output(request):
         text = " ".join(text)
         return(text) 
 
-# "You available now? I'm like right around hillsborough &amp;  &lt;#&gt; th"   
     testing = data
-    #Pre-processing the new string
     testing = [cleaning (testing)]
 
-    #converting words to numerical data using tf-idf
     X_vector = loaded_vectorizer.transform(testing)
 
-    #use the best model to predict 'target' value for the new dataset 
     y_predict = loaded_model.predict(X_vector)      
     y_prob = loaded_model.predict_proba(X_vector)[:,1]
     
